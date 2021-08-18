@@ -57,3 +57,26 @@
 //     }
 //     return diff;
 // }
+
+int Solution::hammingDistance(const vector<int> &A) {
+    long int compare; // will be used to tell weather one is present or 0 is present at a given position
+    int n1 = 0; // number of 1's present at a given position 
+    int n0 = 0; // number of 0's present at a given position
+    long int sum = 0; // total hamming distance
+    int mod = 1000000007;
+    for(int i=0;i<32;i++){
+        compare = 1<<i;
+        n1 = 0;
+        n0 = 0;
+        for(int j=0;j<A.size();j++){
+            if(compare & A[j]){
+                n1 += 1;
+            } 
+            else{
+                n0 += 1;
+            }
+        }
+        sum = (sum + (2*n1*n0)%mod)%mod;
+    }
+    return sum;
+}
