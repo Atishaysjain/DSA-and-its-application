@@ -1,0 +1,114 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct process
+{
+  int process_id;
+  char process_name[15];
+  int process_size;
+  struct process *next;		// Pointer storing the address of the structure process
+};
+
+struct process *head = 0; // head stores the address of the first node
+struct process *temp, *new_process; // temp stores the address of the last node
+
+struct process *complete_process (struct process *head)
+{
+  printf ("The process id of the completed process is :- %d\n",head->process_id);
+  head = head->next;
+  return head;
+};
+
+void show_processes (struct process *head, struct process *new_process)
+{
+  // Printing all the processes of the queue:-
+  new_process = head;
+  while (new_process != 0)
+    {
+      printf ("\n%d\n%s\n%d\n", new_process->process_id, new_process->process_name, new_process->process_size);
+      new_process = new_process->next;
+    }
+};
+
+struct process *insert_processes (struct process *head, struct process *temp, struct process *new_process)
+{
+  new_process = (struct process *) malloc (sizeof (struct process));
+  // new_process is a pointer pointing towards the entity type (struct process)
+  printf ("Enter the process_id\n");
+  scanf ("%d", &new_process->process_id);
+  printf ("Enter the name of the process\n");
+  scanf ("%s", new_process->process_name);
+  printf ("Enter the size of the process in KB\n");
+  scanf ("%d", &new_process->process_size);
+  new_process->next = 0;
+  if (head == 0)
+    {
+      head = new_process;
+      temp = new_process;	// This would point towards the process just before the new process which is to be added
+    }
+  else
+    {
+      temp->next = new_process;
+      temp = new_process;
+    }
+    return temp;
+}
+
+
+int
+main ()
+{
+  int choice = 1;
+  do
+    {
+      new_process = (struct process *) malloc (sizeof (struct process));
+      // new_process is a pointer pointing towards the entity type (struct process)
+      printf ("Enter the process_id\n");
+      scanf ("%d", &new_process->process_id);
+      printf ("Enter the name of the process\n");
+      scanf ("%s", new_process->process_name);
+      printf ("Enter the size of the process in KB\n");
+      scanf ("%d", &new_process->process_size);
+      new_process->next = 0;
+      if (head == 0)
+	{
+	  head = new_process;
+	  temp = new_process;	// This would point towards the process just before the new process which is to be added
+	}
+      else
+	{
+	  temp->next = new_process;
+	  temp = new_process;
+	}
+      printf
+	("Do you want to add a new_process to the queue? Press 1 to add, 2 to remove a completed process and 3 to show the list of processes\n");
+      scanf ("%d", &choice);
+    }while (choice == 1);
+    
+  do
+    {
+      if (choice == 2)
+	{
+	  head = complete_process (head); // Here we have to explicitly mention that head = complete_process(head) so that the returned value of head overwrites the older value of head.
+	  printf
+	    ("Do you want to add a new_process to the queue? Press 1 to add, 2 to remove a completed process and 3 to show the list of processes\n");
+	  scanf ("%d", &choice);
+	}
+      if (choice == 3)
+	{
+	  show_processes (head, new_process);
+	  printf
+	    ("Do you want to add a new_process to the queue? Press 1 to add, 2 to remove a completed process and 3 to show the list of processes\n");
+	  scanf ("%d", &choice);
+	}
+      else if (choice == 1)
+	{
+	  insert_processes (head, temp, new_process);
+	  printf
+	    ("Do you want to add a new_process to the queue? Press 1 to add, 2 to remove a completed process and 3 to show the list of processes\n");
+	  scanf ("%d", &choice);
+	}
+    }
+  while ((choice != 1) || (choice != 2) || (choice != 3));
+  return 0;
+}

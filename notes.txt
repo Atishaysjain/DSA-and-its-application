@@ -1,0 +1,130 @@
+1) DATATYPES (PRIMITIVE, DERIVED, USER DEFINED)
+-> PRIMITIVE 
+i) Int ("%d"):  32 Bit integer (4 bytes) - range upto (2^32 - 1) unsigned integers and ((-2^31) to (2^31 - 1)) unsigned integers. 
+MSB(Left most digit) tells the sign (1 for negetive and 0 for positive).  
+ii) Long int ("%ld"): 64 bit integer (8 bytes)
+iii) short int :  (2 bytes)
+iv) Char ("%c"): Character type (1 byte) - uses ascii table (has 128 symbols corresponding to 0-127 integers) Eg. 97 corresponds to 'a'
+v) Float ("%f"): 32 bit real value (4 bytes) - can store upto 7 decimal digits 
+vi) Double ("%lf"): 64 bit real value (8 bytes) - can store upto 15 decimal digits
+vii) Boolean (1 bit) 0 or 1
+
+Note: You can also use cin and cout instead of scanf and printf; however, if you are taking a million numbers as input and printing a million lines, it is faster to use scanf and printf.
+
+printf("%.3f", e); //It prints the floating point accurately up to 3 decimal places.
+
+scanf("%d", &arr[i])
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+The syntax for a function is
+
+return_type function_name(arg_type_1 arg_1, arg_type_2 arg_2, ...) {
+    ...
+    ...
+    ...
+    [if return_type is non void]
+        return something of type `return_type`;
+}
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+int n_rows = sizeof(arr)/sizeof(arr[0]);
+int n_cols = sizeof(arr[0])/sizeof(arr[0][0]);
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+in cpp even if you dont return the values they will be updated if the function is called
+
+---------------------------------------------------------------------------------------------------------------------------------
+The following are with respective to time complexity :- 
+worst case :- big oh
+best case :- big omega
+average case :- big theta
+
+O(log(n)) < O(sqrt(n)) : This means that the time complexity of sqrt(n) is larger than the time complexity of log(n)
+time complexity is estimated for large numbers of n. So if we have 
+time complexity of g(n) = n^2 for n <= 1000
+time complexity of g(n) = n^4 for n > 1000	
+the O(g(n)) = n^4 
+
+linear search time comlexity :- n
+binary search time comlexity :- O(log(n))
+
+ 	        Best	Average Worst	 
+Selection Sort	Ω(n^2)	θ(n^2)	O(n^2)	 
+Bubble Sort	Ω(n)	θ(n^2)	O(n^2)	 
+Insertion Sort	Ω(n)	θ(n^2)	O(n^2)
+---------------------------------------------------------------------------------------------------------------------------------
+
+#include<climits>
+
+min = INT_MIN // minimum integer in cpp
+max = INT_MAX // maximum integer in cpp
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+1 second = 10^8 operations
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+// Keep in mind the following things :- 
+// to get n-1 from n :- flip all the digits from the right most set(1) bit of n including the rightmost set bit
+// Example :- n => 8(1000) ; n-1 = 7(0111) {we flipped all bits after 1 in 8 because it was the rightmost bit. Same would be the case with n=5(0101) and n-1=4(0100)} 
+    
+---------------------------------------------------------------------------------------------------------------------------------
+
+name of the function cannot start with a number
+name of a cpp file can start with a number 
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+abs(A) => would return the absolute value of that number
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+vector<bool> isprime(n+1,true);
+vector<int> ans;
+isprime[i]=false;
+ans.push_back(i);
+ans.at(i)
+reverse(ans.begin(), ans.end());
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+string a;
+a.append(to_string(1));
+a.reverse(a.begin(), a.end());
+stoi(a) // converting string to integer
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+string Solution::findDigitsInBinary(int A) {
+    string binary;
+    if(A == 0){
+        return to_string(0);
+    }
+    while(A!=0){
+        binary.append(to_string(A%2));
+        A /= 2;
+    }
+    reverse(binary.begin(), binary.end());
+    return binary;
+}
+
+
+---------------------------------------------------------------------------------------------------------------------------------
+Q) A items are to be delivered in a circle of size B.
+
+Find the position where the Ath item will be delivered if we start from a given position C.
+
+NOTE: Items are distributed at adjacent positions starting from C
+
+Ans) 
+int Solution::solve(int A, int B, int C) {
+    return (C + (A%B) - 1)%B; 
+}
+
+
+

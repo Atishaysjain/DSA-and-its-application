@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<stdlib.h>
+// Note that C does not allow dynamic size allocation for arrays. Thus if want to allocate the size of an array in terms of variables then we
+// must define it here. If we declare a variable using (int n = 5) and then use it to allocate memory to the array then it would show error
+// when a variable is defined in this way then its value cannot be changed for the entire programme
+// While this is not the case with cpp. You can take the size of the array as input from the user in the form of a variable then assign it as  size 
+#define n 5 // n defines the number of processes. Let p1, p2, p3, p4 and p5 be the five processes
+#define m 3 // m defines the number of resources
+main()
+{
+    //int n = 5; // n defines the number of processes. Let p1, p2, p3, p4 and p5 be the five processes
+    //int m = 3; // m defines the number of resources
+    int max [n][m] = {{3, 5, 7}, {6, 2, 5}, {1, 2, 4}, {0, 2, 3}, {6, 1, 1}}; // The maximum number of resources that the process requires
+    int alloc [n][m] = {{1, 2, 3}, {2, 2, 1}, {1, 1, 3}, {0, 0, 0}, {2, 0, 0}}; // Number of resources allocated to the respective processes
+    int available[3] = {5, 3, 4}; 
+    // We could have declared this array as :- int available[] = {1, 2, 3}
+    // We can declre an array like int a[][2] = {{1,2},{3,4},{5,6},{7,8}}. But cannot like this - int a[4][] = {{1,2},{3,4},{5,6},{7,8}}
+    // Meaning that we can only leave the left most bracket unassigned 
+    int i, j, k;
+    int index = 0;
+    int need [n][m];
+    for(i = 0;i < n;i++)
+    {
+        for(j = 0;j < m;j++)
+        {
+            need[i][j] = max[i][j] - alloc[i][j];
+        }
+    }
+    //int a [n] = {0, 0, 0, 0, 0}
+    int flag = 0;
+    int sequence[] = {0,0,0,0,0};
+    for(k = 0;k < n;k++)
+    {
+        for(i = 0;i < n;i++)
+        {
+            flag = 0;
+            for(j = 0;j < m;j++)
+            {
+                if(need[i][j] < available[j])
+                {
+                    flag = flag + 1;
+                }
+            }
+            if(flag == 3)
+            {
+                for(j = 0;j < m;j++)
+                {
+                    available[j] = available[j] + alloc[i][j];
+                }
+                sequence[index] = i + 1;
+                index = index + 1;
+                //printf("%d\t",i);
+            }
+        }
+    }
+    for(i = 0;i < n;i++)
+    {
+        printf("%d ",sequence[i]);
+    }
+    return 0;
+}
