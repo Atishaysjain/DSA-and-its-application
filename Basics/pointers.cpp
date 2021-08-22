@@ -46,6 +46,8 @@ int main(){
     *pointer = 10;
     // cout<<pointer<" "<<*pointer<<endl;
     delete(pointer); // deallocate memory
+
+    int *pntr = new int(10); 
     
     pointer = new int[4];
     cout<<pointer<<endl;
