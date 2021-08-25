@@ -61,8 +61,12 @@ void sum_of_levels(node* root){
         else if(q.front() != NULL){
             node* newnode = q.front();
             sum += newnode->data;
-            q.push(newnode->left);
-            q.push(newnode->right);
+            if(newnode->left != NULL){
+                q.push(newnode->left);
+            }
+            if(newnode->right != NULL){
+                q.push(newnode->right);
+            }
             q.pop();
         }
         // cout<<"check "<<sum<<endl;
