@@ -84,9 +84,39 @@ void traverse(node* head){
         cout<<"->"<<head->data;
         head = head -> next;
     }
+    cout<<endl;
     return;
 }
 
+void append_k(node** head, int pos){ // takes the last k nodes and appends them at the beginning
+
+    // head->1->2->3->4->5->NULL
+    if(*head == NULL){
+        cout<<"NULL pointer recieved"<<endl;
+        return;
+    }
+
+    node* temp = *head;
+    if(temp->next == NULL){
+        return;
+    }
+
+    int count = 1;
+    node* addr_prev;
+    while(temp->next != NULL){
+        if(count == pos){
+            addr_prev = temp;
+        }
+        temp = temp->next;
+        count += 1;
+    }
+    temp->next = *head;
+    *head = addr_prev->next;
+    addr_prev->next = NULL;
+
+    return;
+
+}
 int main(){
 
     node* head = new node(1); // head ponter pointing towards the first node
@@ -95,11 +125,13 @@ int main(){
     insertAtHead(&head, 0); // 0 will be inserted as the first node
     insertAtPositon(head, 2, 2);
     traverse(head);
-    cout<<endl;
     deleteAtTail(head);
     deleteAtHead(&head);
     traverse(head);
+    insertAtTail(head, 4);
+    insertAtTail(head, 5);
+    append_k(&head, 3); // takes the last k nodes and appends them at the beginning
+    traverse(head);
 
- 
     return 0;
 }

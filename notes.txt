@@ -115,6 +115,7 @@ string Solution::findDigitsInBinary(int A) {
 
 
 ---------------------------------------------------------------------------------------------------------------------------------
+
 Q) A items are to be delivered in a circle of size B.
 
 Find the position where the Ath item will be delivered if we start from a given position C.
@@ -126,5 +127,7 @@ int Solution::solve(int A, int B, int C) {
     return (C + (A%B) - 1)%B; 
 }
 
+---------------------------------------------------------------------------------------------------------------------------------
 
+A SIGSEGV is an error(signal) caused by an invalid memory reference or a segmentation fault. You are probably trying to access an array element out of bounds or trying to use too much memory.
 
