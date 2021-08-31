@@ -2,7 +2,6 @@
 using namespace std;
 
 struct node{
-    public:
     int data;
     node* next;
     node* prev;
@@ -91,7 +90,7 @@ node* insert_at_pos(node* root, int data, int pos){
 
     int count = 1;
     node* temp = root;
-    while(pos != count || temp != NULL){
+    while(pos != count && temp != NULL){
         temp = temp->next;
         count++;
     }
@@ -190,7 +189,7 @@ int main(){
     traverse(root);
     delete_at_root(&root);
     root = delete_at_pos(root, 2);
-    // root = insert_at_pos(root, 5, 4);
+    root = insert_at_pos(root, 10, 4);
 
     traverse(root);
 

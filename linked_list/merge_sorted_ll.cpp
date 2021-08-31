@@ -2,7 +2,6 @@
 using namespace std;
 
 struct node{
-    public:
     int data;
     node* next;
     node(int val){
