@@ -1,1 +1,0 @@
-{"name":"Local: b","url":"/home/atishay/codeforces_contest_1/.vscode/b.cpp","tests":[{"id":1629301818304,"input":"7\n6 2 4\n2 3 1\n2 4 10\n5 3 4\n1 3 2\n2 5 4\n4 3 2","output":"8\n-1\n-1\n-1\n4\n1\n-1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/atishay/codeforces_contest_1/.vscode/b.cpp","group":"local","local":true}
