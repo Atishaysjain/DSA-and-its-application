@@ -23,61 +23,6 @@ void display(stack<int> st){
     return;
 }
 
-int postfix_evaluaton(string s){
-
-    stack <int> st;
-    int i = 0;
-    cout<<s<<endl;
-    while(i<s.length()){
-        string element = "";
-        bool is_operand = false;
-        cout<<s[i]<<" ";
-        cout<<endl;
-        while(s[i] != ' '){
-            cout<<s[i]<<" ";
-            element += s[i];
-            if(s[i]>= '0' && s[i]<= '9'){
-                is_operand = true;
-            }
-            i++;
-        }
-        i++;
-        // cout<<element;
-        // if(i == s.length() - 1){
-        //     break;
-        // }else{i++;}
-        // if(is_operand){
-        //     int num = stoi(element);
-        //     st.push(num);
-        //     cout<<num<<endl;
-        // }
-        // else{
-        //     int op1 = st.top();
-        //     st.pop();
-        //     int op2 = st.top();
-        //     st.pop();
-        //     switch(s[i]){
-        //         case '+':
-        //             st.push(op1+op2);
-        //             break;
-        //         case '-':
-        //             st.push(op1-op2);
-        //             break;
-        //         case '*':
-        //             st.push(op1*op2);
-        //             break;
-        //         case '/':
-        //             st.push(op1/op2);
-        //             break;
-        //         default :
-        //             break;
-        //     }
-        // }
-    }
-    // return st.top();
-    return 0;
-}
-
 int prefix_expression_evaluaton(string s){
 
     stack<int> st;
@@ -114,29 +59,77 @@ int prefix_expression_evaluaton(string s){
     return st.top();
 }
 
+int precedence(char c){
+    if(c == '+' || c == '-'){
+        return 1;
+    }
+    if(c == '*' || c == '/'){
+        return 2;
+    }
+    if(c == '^'){
+        return 3;
+    }
+    return -1;
+}
+
+string infix_to_postfix(string infix_expression){
+
+// 1*2+3-4*4/(8-4) => ((1*2)+3)-(4*(4/(8-4))) => 1 2 * 3 + 4 4 8 4 - / * -
+    cout<<infix_expression<<endl;
+    stack <char> st;
+    string result = ""; 
+    for(int i=0;i<infix_expression.length();i++){
+        if(infix_expression[i] > '0' && infix_expression[i] < '9'){
+            result += infix_expression[i];
+        }
+        else if(infix_expression[i] == ')'){
+            while(st.top() != '(' && !st.empty()){
+                result += st.top();
+                st.pop();
+            }
+            if(!st.empty()){
+                st.pop();
+            }
+        }
+        else if(infix_expression[i] == '('){
+            st.push(infix_expression[i]);
+        }
+        else{
+            if(!st.empty()){
+                while(precedence(st.top()) >= precedence(infix_expression[i]) && !st.empty()){
+                    result += st.top();
+                    st.pop();
+                    if(st.empty()){
+                        break;  
+                    }
+                }
+                st.push(infix_expression[i]);
+            }
+            else{
+                st.push(infix_expression[i]);
+            }
+        }
+    }
+    while(!st.empty()){
+        result += st.top();
+        st.pop();
+    }
+    return result;
+}
+
 int main(){
 
     int arr[] = {1,2,3,4,5};
     stack<int> st;
-    create_stack(st, arr, 5);
+    create_stack(st, arr, 5);                       
     // display(st);
 
-    string postfix_expression = "1 2 * 3 + 5 4 10 / * -";
-    // cout<<postfix_evaluaton(postfix_expression)<<endl;
-    // postfix_evaluaton(postfix_expression);
-
     string prefix_expression = "-+*123*4/48";
-    // string prefix_expression = "-+7*45+20";
     cout<<prefix_expression_evaluaton(prefix_expression)<<endl;
 
-    // string a = "atishay";
-    // string element = "";
-    // cout<<element<<endl;
-    // cout<<a[0]<<endl;
-    // element += a[0];
-    // element += a[1];
-    // cout<<element<<endl;
-
+    string infix_expression = "1*2+3-4*4/(8-4)";
+    string postfix_converted = infix_to_postfix(infix_expression);
+    cout<<postfix_converted<<endl;
     return 0;
 }
 
