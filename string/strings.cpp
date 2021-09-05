@@ -91,7 +91,6 @@ int main(){
 void maxLetterOccurance(){
     string str;
     cin>>str;
-    cout
     int freq[26];
     for(int i=0;i<26;i++){
         freq[i] = 0;

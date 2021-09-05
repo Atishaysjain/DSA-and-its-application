@@ -49,8 +49,12 @@ int main(){
 
     int *pntr = new int(10); 
     
-    pointer = new int[4];
+    int *pointer = new int[4];
     cout<<pointer<<endl;
+    cout<<*pointer<<endl;
+    cout<<pointer[0]<<endl;
+    *(pointer+1) = 1;
+    cout<<pointer[1]<<endl;
     delete[]p;
     p = NULL;
 
