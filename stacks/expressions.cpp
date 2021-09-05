@@ -75,7 +75,6 @@ int precedence(char c){
 string infix_to_postfix(string infix_expression){
 
 // 1*2+3-4*4/(8-4) => ((1*2)+3)-(4*(4/(8-4))) => 1 2 * 3 + 4 4 8 4 - / * -
-    cout<<infix_expression<<endl;
     stack <char> st;
     string result = ""; 
     for(int i=0;i<infix_expression.length();i++){
@@ -117,6 +116,46 @@ string infix_to_postfix(string infix_expression){
     return result;
 }
 
+void reverse_and_change_brackets(string &s){
+    for(int i =0;i<(s.length())/2;i++){
+        char temp = s[i];
+        s[i] = s[s.length() - 1 - i];
+        s[s.length() - 1 - i] = temp;
+        if(s[i] == ')'){
+            s[i] = '(';
+        }
+        else if(s[i] == '('){
+            s[i] = ')';
+        }
+        if(s[s.length() - 1 - i] == ')'){
+            s[s.length() - 1 - i] = '(';
+        }
+        else if(s[s.length() - 1 - i] == ')'){
+            s[s.length() - 1 - i] = '(';
+        }
+    }
+}
+
+string infix_to_prefix(string s){
+    // ((1*2)+3)-(4*(4/8)) = 3 => prefix expression => - + * 1 2 3 * 4 / 4 8
+
+    // First reverse the string
+    // Then swap '(' whith ')' and vice verse
+    // Then apply infix_to_posfix
+    // Then reverse the Ouptut string
+
+
+    reverse_and_change_brackets(s);
+
+    string result = infix_to_postfix(s);
+
+    reverse_and_change_brackets(result);
+
+     
+    return result;
+
+}
+
 int main(){
 
     int arr[] = {1,2,3,4,5};
@@ -125,11 +164,15 @@ int main(){
     // display(st);
 
     string prefix_expression = "-+*123*4/48";
-    cout<<prefix_expression_evaluaton(prefix_expression)<<endl;
+    cout<<"Prefix expression evaluated :- "<<prefix_expression_evaluaton(prefix_expression)<<endl;
 
     string infix_expression = "1*2+3-4*4/(8-4)";
+    cout<<"infix_expression :- "<<infix_expression<<endl;
     string postfix_converted = infix_to_postfix(infix_expression);
-    cout<<postfix_converted<<endl;
+    cout<<"Converted Postfix Expression :- "<<postfix_converted<<endl;
+
+    string prefix_converted = infix_to_prefix(infix_expression);
+    cout<<"Converted Prefix Expression :- "<<prefix_converted<<endl;
     return 0;
 }
 
