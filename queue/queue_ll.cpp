@@ -32,27 +32,20 @@ struct queue_{
     }
 
     void dequeue(){
-        if(back == NULL){
+        if(front == NULL){
             cout<<"The queue is already empty"<<endl;
             return;
         }
         if(front == back){
-            delete(front);
-            delete(back);
+            delete front;
+            delete back;
             back = NULL;
             front = NULL;
             return;
         }
-        // 1->2->NULL
-        delete(front);
+        node* to_delete =  front;
         front = front->next;
-        // node* temp = front;
-        // while(temp->next->next != NULL){
-        //     temp = temp->next;
-        // }
-        // delete(back);
-        // back = temp;
-        // back->next = NULL;
+        delete to_delete;
         return;
     }
 
@@ -73,15 +66,19 @@ int main(){
 
     queue_ q;
     q.dequeue(); 
-    q.enqueue(0);
-    q.enqueue(1);
     cout<<q.peek()<<endl;
-    q.enqueue(3);
-    q.dequeue();
+    q.enqueue(0);
+    cout<<q.peek()<<endl;
+    q.enqueue(1);
     q.enqueue(2);
     q.enqueue(3);
     cout<<q.peek()<<endl;
-
+    q.dequeue();
+    cout<<q.peek()<<endl;
+    q.dequeue();
+    cout<<q.peek()<<endl;
+    q.dequeue();
+    cout<<q.peek()<<endl;
 
     return 0;
 }
